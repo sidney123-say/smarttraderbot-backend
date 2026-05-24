@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: smarttraderbot-api
+    env: python
+    region: frankfurt
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ENVIRONMENT
+        value: production
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
